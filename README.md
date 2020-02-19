@@ -1,5 +1,5 @@
 # SSM框架整合
-
+回顾了下Spring,SpringMVC,MyBatis框架整合，完善了一个小案例，包括基本的增删改查功能。
 #### 环境要求
 
 - IDEA
@@ -750,6 +750,9 @@ INSERT  INTO `books`(`bookID`,`bookName`,`bookCounts`,`detail`)VALUES
    </body>
    </html>
    ```
+## 参考资料
+[狂神说Java](https://www.bilibili.com/video/av71874024?p=1)   
+后期自己完善了分页和模糊查询功能。
 
    
 
