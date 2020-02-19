@@ -19,6 +19,7 @@
             </div>
         </div>
     </div>
+
     <form action="${pageContext.request.contextPath}/book/updateBook" method="post">
         <input type="hidden" name="bookId" value="${book.getBookId()}"/>
         书籍名称：<input type="text" name="bookName" value="${book.getBookName()}"/>

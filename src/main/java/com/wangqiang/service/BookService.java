@@ -1,8 +1,6 @@
 package com.wangqiang.service;
 
 import com.wangqiang.pojo.Books;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
 
 /**

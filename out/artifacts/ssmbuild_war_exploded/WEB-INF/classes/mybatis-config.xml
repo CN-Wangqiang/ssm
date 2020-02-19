@@ -6,7 +6,12 @@
     <typeAliases>
         <package name="com.wangqiang.pojo"/>
     </typeAliases>
+
+
+
     <mappers>
         <mapper class="com.wangqiang.dao.BookMapper" ></mapper>
     </mappers>
+
+
 </configuration>
