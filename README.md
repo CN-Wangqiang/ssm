@@ -536,7 +536,7 @@ INSERT  INTO `books`(`bookID`,`bookName`,`bookCounts`,`detail`)VALUES
      	//查询全部书籍信息
        @RequestMapping("/allBook")
        public String list(Model model){
-           List<Books> books = bookService.queryAllBook();
+           List<Books> books = bookService.queryAllBook(curPage, pageSize);
            model.addAttribute("books",books);
            return "allBook";
        }

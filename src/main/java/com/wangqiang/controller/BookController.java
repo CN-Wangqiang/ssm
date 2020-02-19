@@ -1,5 +1,6 @@
 package com.wangqiang.controller;
 
+import com.wangqiang.dto.PaginationDTO;
 import com.wangqiang.pojo.Books;
 import com.wangqiang.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.awt.print.Book;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,9 +32,11 @@ public class BookController {
     private BookService bookService;
 
     @RequestMapping("/allBook")
-    public String list(Model model){
-        List<Books> books = bookService.queryAllBook();
-        model.addAttribute("books",books);
+    public String list(Model model,
+                       @RequestParam(name="curPage",defaultValue = "1") Integer curPage,
+                       @RequestParam(name = "pageSize",defaultValue = "5")Integer pageSize){
+        PaginationDTO paginationDTO = bookService.queryAllBook(curPage,pageSize);
+        model.addAttribute("list",paginationDTO);
         return "allBook";
 
     }
@@ -67,6 +74,19 @@ public class BookController {
     public String deleteBook(@PathVariable("bookId") int id) {
         bookService.deleteBookById(id);
         return "redirect:/book/allBook";
+    }
+
+    @RequestMapping("/queryBookByName")
+    public String queryBookByName(@RequestParam(name = "bookName",required = false)String bookName,
+                                  @RequestParam(name="curPage",defaultValue = "1") Integer curPage,
+                                  @RequestParam(name = "pageSize",defaultValue = "5")Integer pageSize,
+                                  Model model){
+        PaginationDTO paginationDTO = bookService.queryBookByName(bookName,curPage,pageSize);
+        if (paginationDTO == null){
+            model.addAttribute("error","未查到相关书籍");
+        }
+        model.addAttribute("list",paginationDTO);
+        return "allBook";
     }
 
 }

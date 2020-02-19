@@ -1,7 +1,7 @@
 package com.wangqiang.service;
 
+import com.wangqiang.dto.PaginationDTO;
 import com.wangqiang.pojo.Books;
-import java.util.List;
 
 /**
  * @version : V1.0
@@ -19,5 +19,7 @@ public interface BookService {
 
     Books queryBookById(int id);
 
-    List<Books> queryAllBook();
+    PaginationDTO queryAllBook(Integer curPage, Integer pageSize);
+
+    PaginationDTO queryBookByName(String bookName,Integer curPage, Integer pageSize);
 }

@@ -16,5 +16,9 @@ public interface BookMapper {
     int deleteBookById(@Param(value = "bookId") int id);
     int updateBook(Books book);
     Books queryBookById(@Param(value = "bookId")int id);
-    List<Books> queryAllBook();
+    List<Books> queryAllBook(@Param(value = "curPage")int curPage,@Param(value = "pageSize")int pageSize);
+    List<Books> queryBookByName(@Param(value = "bookName")String bookName,@Param(value = "curPage")int curPage,@Param(value = "pageSize")int pageSize);
+    int queryBookCount();
+    int queryBookCountByName(@Param(value = "bookName")String bookName);
+
 }

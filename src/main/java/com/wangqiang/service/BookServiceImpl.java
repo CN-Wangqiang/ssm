@@ -1,7 +1,9 @@
 package com.wangqiang.service;
 
 import com.wangqiang.dao.BookMapper;
+import com.wangqiang.dto.PaginationDTO;
 import com.wangqiang.pojo.Books;
+
 import java.util.List;
 
 /**
@@ -36,7 +38,54 @@ public class BookServiceImpl implements BookService {
         return bookMapper.queryBookById(id);
     }
 
-    public List<Books> queryAllBook() {
-        return bookMapper.queryAllBook();
+    public PaginationDTO queryAllBook(Integer curPage, Integer pageSize) {
+        PaginationDTO<Object> paginationDTO = new PaginationDTO<>();
+        Integer totalPage;
+        Integer totalCount = bookMapper.queryBookCount();
+        if(totalCount % pageSize == 0){
+            totalPage = totalCount / pageSize;
+        }else {
+            totalPage = totalCount / pageSize + 1;
+        }
+        if (curPage < 1){
+            curPage = 1;
+        }
+        if (curPage > totalPage){
+            curPage = totalPage;
+        }
+
+        paginationDTO.setPagination(totalPage,curPage);
+        Integer offset = pageSize * (curPage - 1);
+
+        List<Books> books = bookMapper.queryAllBook(offset, pageSize);
+        paginationDTO.setData(books);
+
+        return paginationDTO;
+    }
+
+    public PaginationDTO queryBookByName(String bookName,Integer curPage, Integer pageSize) {
+        PaginationDTO<Object> paginationDTO = new PaginationDTO<>();
+        Integer totalPage;
+        Integer totalCount = bookMapper.queryBookCountByName(bookName);
+        if(totalCount % pageSize == 0){
+            totalPage = totalCount / pageSize;
+        }else {
+            totalPage = totalCount / pageSize + 1;
+        }
+        if (curPage < 1){
+            curPage = 1;
+        }
+        if (curPage > totalPage){
+            curPage = totalPage;
+        }
+
+        paginationDTO.setPagination(totalPage,curPage);
+        Integer offset = pageSize * (curPage - 1);
+
+        List<Books> books = bookMapper.queryBookByName(bookName,offset,pageSize);
+        paginationDTO.setData(books);
+
+        return paginationDTO;
+
     }
 }
