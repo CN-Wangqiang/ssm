@@ -19,11 +19,17 @@ public class MyTest {
     public  void test(){
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         BookService bookServiceImpl = context.getBean("BookServiceImpl", BookService.class);
-        PaginationDTO paginationDTO = bookServiceImpl.queryBookByName("Java", 0, 3);
+        PaginationDTO paginationDTO = bookServiceImpl.queryBookByName("", 0, 3);
         List<Books> books = paginationDTO.getData();
         for (Books book : books) {
             System.out.println(book);
         }
-
+    }
+    @Test
+    public void test1(){
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        BookService bookServiceImpl = context.getBean("BookServiceImpl", BookService.class);
+        int count = bookServiceImpl.queryBookCountByName("");
+        System.out.println(count);
     }
 }

@@ -81,10 +81,13 @@ public class BookController {
                                   @RequestParam(name="curPage",defaultValue = "1") Integer curPage,
                                   @RequestParam(name = "pageSize",defaultValue = "5")Integer pageSize,
                                   Model model){
-        PaginationDTO paginationDTO = bookService.queryBookByName(bookName,curPage,pageSize);
-        if (paginationDTO == null){
+        int count = bookService.queryBookCountByName(bookName);
+        if (count == 0){
             model.addAttribute("error","未查到相关书籍");
+            model.addAttribute("list",null);
+            return "allBook";
         }
+        PaginationDTO paginationDTO = bookService.queryBookByName(bookName, curPage, pageSize);
         model.addAttribute("list",paginationDTO);
         return "allBook";
     }

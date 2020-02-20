@@ -32,18 +32,17 @@
 
     <select id="queryBookByName"  resultType="Books">
         select * from ssmbuild.books
-        <if test="bookName != null and bookName != ''">
-         where bookName like #{bookName}
-         </if>
+        <where>
+            <if test="bookName != null and bookName != ''">
+                bookName like #{bookName}
+            </if>
+        </where>
         limit #{curPage},#{pageSize};
     </select>
 
     <select id="queryBookCountByName"  resultType="int">
         select count(*) from ssmbuild.books
-        <if test="bookName != null and bookName != ''">
-        where bookName like #{bookName}
-        </if>
-        ;
+         where bookName like #{bookName};
     </select>
 
 </mapper>

@@ -38,6 +38,11 @@ public class BookServiceImpl implements BookService {
         return bookMapper.queryBookById(id);
     }
 
+    @Override
+    public int queryBookCountByName(String bookName) {
+        return bookMapper.queryBookCountByName(bookName);
+    }
+
     public PaginationDTO queryAllBook(Integer curPage, Integer pageSize) {
         PaginationDTO<Object> paginationDTO = new PaginationDTO<>();
         Integer totalPage;
@@ -67,6 +72,9 @@ public class BookServiceImpl implements BookService {
         PaginationDTO<Object> paginationDTO = new PaginationDTO<>();
         Integer totalPage;
         Integer totalCount = bookMapper.queryBookCountByName(bookName);
+        if (totalCount.equals(0)) {
+            return paginationDTO;
+        }
         if(totalCount % pageSize == 0){
             totalPage = totalCount / pageSize;
         }else {
