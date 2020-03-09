@@ -29,7 +29,7 @@
             <span style="color: red">${error}</span>
         </div>
         <div class="col-md-3 column">
-            <form action="${pageContext.request.contextPath}/book/queryBookByName" method="" >
+            <form action="${pageContext.request.contextPath}/book/queryBook" method="" >
                     <div class="input-group">
                         <input type="text" name="bookName" class="form-control" placeholder="请输入要查找的书籍">
                         <span class="input-group-btn">
@@ -74,7 +74,7 @@
         <ul class="pagination" style="float: right">
             <c:if test="${list.showFirstPage}">
                 <li>
-                    <a href="${pageContext.request.contextPath}/book/allBook?curPage=1" aria-label="Previous">
+                    <a href="${pageContext.request.contextPath}/book/queryBookByName?curPage=1&bookName=${bookName}" aria-label="Previous">
                         <span aria-hidden="true">首页</span>
                     </a>
                 </li>
@@ -82,19 +82,19 @@
 
             <c:if test = "${list.showPrevious}">
             <li>
-                <a href="${pageContext.request.contextPath}/book/allBook?curPage=${page -1}" aria-label="Previous">
+                <a href="${pageContext.request.contextPath}/book/queryBook?curPage=${list.page -1}&bookName=${bookName}" aria-label="Previous">
                     <span aria-hidden="true">上一页</span>
                 </a>
             </li>
             </c:if>
 
             <c:forEach var="page" items="${list.pages}" >
-                <li><a href="${pageContext.request.contextPath}/book/allBook?curPage=${page}" >${page}</a></li>
+                <li><a href="${pageContext.request.contextPath}/book/queryBook?curPage=${page}&bookName=${bookName}" >${page}</a></li>
             </c:forEach>
 
             <c:if test = "${list.showNext}">
                 <li >
-                    <a href="${pageContext.request.contextPath}/book/allBook?curPage=${page + 1}" aria-label="Next">
+                    <a href="${pageContext.request.contextPath}/book/queryBook?curPage=${list.page + 1}&bookName=${bookName}" aria-label="Next">
                         <span aria-hidden="true">下一页</span>
                     </a>
                 </li>
@@ -102,7 +102,7 @@
 
             <c:if test = "${list.showEndPage}">
                 <li>
-                    <a href="${pageContext.request.contextPath}/book/allBook?curPage=${list.totalPage}" aria-label="Previous">
+                    <a href="${pageContext.request.contextPath}/book/queryBook?curPage=${list.totalPage}&bookName=${bookName}" aria-label="Previous">
                         <span aria-hidden="true">尾页</span>
                     </a>
                 </li>

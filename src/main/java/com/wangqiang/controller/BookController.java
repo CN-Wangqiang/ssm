@@ -76,7 +76,7 @@ public class BookController {
         return "redirect:/book/allBook";
     }
 
-    @RequestMapping("/queryBookByName")
+    @RequestMapping("/queryBook")
     public String queryBookByName(@RequestParam(name = "bookName",required = false)String bookName,
                                   @RequestParam(name="curPage",defaultValue = "1") Integer curPage,
                                   @RequestParam(name = "pageSize",defaultValue = "5")Integer pageSize,
@@ -88,6 +88,7 @@ public class BookController {
             return "allBook";
         }
         PaginationDTO paginationDTO = bookService.queryBookByName(bookName, curPage, pageSize);
+        model.addAttribute("bookName",bookName);
         model.addAttribute("list",paginationDTO);
         return "allBook";
     }
