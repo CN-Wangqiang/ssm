@@ -74,7 +74,7 @@
         <ul class="pagination" style="float: right">
             <c:if test="${list.showFirstPage}">
                 <li>
-                    <a href="${pageContext.request.contextPath}/book/queryBookByName?curPage=1&bookName=${bookName}" aria-label="Previous">
+                    <a href="${pageContext.request.contextPath}/book/queryBook?curPage=1&bookName=${bookName}" aria-label="Previous">
                         <span aria-hidden="true">首页</span>
                     </a>
                 </li>
